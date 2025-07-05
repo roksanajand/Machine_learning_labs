@@ -1,0 +1,29 @@
+1. Czym jest bias w uczeniu maszynowym?
+Bias w uczeniu maszynowym to błąd systematyczny, czyli różnica między średnią predykcją modelu a rzeczywistą wartością.
+Model z wysokim biasem:
+- nie jest w stanie dobrze uchwycić złożonych zależności w danych,
+- ignoruje istotne cechy lub relacje,
+- popełnia podobne błędy niezależnie od zbioru treningowego,
+- często prowadzi do niedouczenia (underfittingu).
+Wysoki bias pojawia się zazwyczaj w zbyt prostych modelach, np. liniowych dla nieliniowych danych, i prowadzi do dużego błędu ogólnego.
+
+2. Jaka jest zasada bias-variance tradeoff?
+Bias–variance trade-off to zasada mówiąca, że aby zminimalizować błąd predykcji, należy znaleźć równowagę między biasem (błędem systematycznym, rosnącym przy zbyt prostych modelach) a wariancją (zmiennością modelu, rosnącą przy zbyt złożonych modelach). Idealny model leży w „sweet spot” – ani za prosty, ani za skomplikowany.
+
+3. Jakie są przykłady modeli o dużym biasie?
+To takie modele, które są zbyt proste, by uchwycić prawdziwe zależności w danych.
+- Regresja liniowa – jeśli dane mają nieliniową strukturę, model liniowy nie jest w stanie jej uchwycić, co prowadzi do systematycznego błędu predykcji
+- KNN z dużym k – przy dużym k predykcja jest uśredniana na podstawie zbyt wielu sąsiadów, co skutkuje gładkimi, zbyt ogólnymi przewidywaniami
+- Drzewa decyzyjne z małą głębokością – nie rozgałęziają się wystarczająco, by modelować złożone zależności
+
+4. Jakie są przykłady modeli o dużej wariancji?
+To takie modele, które silnie dopasowują się do danych treningowych, ale źle generalizują na nowych danych. Są bardzo czułe na zmiany w zbiorze treningowym.
+- KNN z bardzo małym k (np. k = 1) – model zapamiętuje każdy punkt treningowy, przez co silnie reaguje na szum i drobne zmiany w danych
+- Głębokie drzewa decyzyjne (bez przycinania) – każde poddrzewo może idealnie dopasować się do konkretnej grupy obserwacji, co prowadzi do overfittingu 
+- Modele zespołowe bez regularyzacji (np. Boosting z dużą liczbą iteracji) – potrafią uczyć się także ze szumu, jeśli nie ograniczymy ich złożoności
+
+5. W jaki sposób można zminimalizować bias w modelach?
+Aby zmniejszyć bias (błąd systematyczny), należy zwiększyć zdolność modelu do uchwycenia zależności w danych, czyli zastosować bardziej złożone podejście. Można to osiągnąć poprzez zwiększenie złożoności modelu, na przykład używając regresji wielomianowej zamiast liniowej, drzew decyzyjnych o większej głębokości lub mniejszego k w KNN. Kolejną metodą jest dodanie nowych cech (feature engineering), np. uwzględnienie interakcji lub przekształceń zmiennych wejściowych, co umożliwia lepsze dopasowanie do danych. Skuteczne może być również zastosowanie bardziej elastycznych modeli, takich jak sieci neuronowe, SVM z nieliniowymi kernelami, Random Forest czy Boosting, które mają większą zdolność modelowania skomplikowanych wzorców. Należy pamiętać, że zmniejszając bias, często zwiększamy wariancję, dlatego istotne jest zachowanie balansu między tymi dwoma składnikami błędu.
+
+6. Jakie techniki pomagają zmniejszyć wariancję
+Aby zmniejszyć wariancję modelu, należy ograniczyć jego wrażliwość na dane treningowe, co poprawia zdolność generalizacji. Można to osiągnąć poprzez zastosowanie technik regularizacji, takich jak Ridge (L2) lub Lasso (L1), które ograniczają wielkość współczynników i zmniejszają nadmierne dopasowanie. Skuteczną metodą jest również zastosowanie technik zespołowych, takich jak bagging (np. Random Forest), które uśredniają wiele modeli uczonych na różnych próbkach danych, redukując zmienność predykcji. Inna strategia to ograniczenie złożoności modelu, na przykład przez przycinanie drzew decyzyjnych lub zwiększenie wartości k w KNN, co powoduje uśrednianie większej liczby obserwacji. Pomocne może być także zwiększenie liczby danych treningowych, co stabilizuje model i zmniejsza wpływ szumu. Dodatkowo stosowanie walidacji krzyżowej pozwala na lepsze oszacowanie stabilności modelu i wybór parametrów minimalizujących wariancję.
